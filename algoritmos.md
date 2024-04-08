@@ -6,9 +6,6 @@ establecidas por el instructor. Tenga en cuenta los diferentes tipos de estructu
 condicionales y repetitivas.
 Problemas propuestos:
     
-    
-    
-    
     8. Diseñar un algoritmo que permita ingresar la hora, minutos y segundos, y que calcule la hora en el siguiente
     segundo ("0<= H <=23", "0<= M <=59" "0<= S<=59").
     9. Dado N, escribir el producto desde 1 hasta N.
