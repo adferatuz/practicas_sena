@@ -36,6 +36,6 @@ def calcular_el_producto_hasta_n():
         except ValueError as e:
             print(f"error {e} el valor ingresado es incorrecto, intenta nuevamente")
                             
-calcular_el_producto_hasta_n()
+
 
 
