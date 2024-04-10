@@ -36,7 +36,7 @@ def calcular_hora():
                 break
         except ValueError:
             print(f'formato inválido. Por favor intrucle la opción otra vez: ')
-calcular_hora()
+
     
 
 

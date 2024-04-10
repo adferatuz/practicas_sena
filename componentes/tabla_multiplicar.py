@@ -30,5 +30,5 @@ def tabla_multiplicar():
             # Se maneja la excepción si el usuario ingresa un valor no válido
             print (f'Dato inválido. Por favor, introduce un número en el formato correcto.')
             # Se continúa con la iteración del bucle while si se captura una excepción.
-tabla_multiplicar()
+
     

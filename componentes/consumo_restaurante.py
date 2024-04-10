@@ -2,7 +2,7 @@
 # cada cliente excede 50000 se hará un descuento del 20%. Se debe mostrar el pago de cada cliente y el total
 # de todos los pagos.
 
-from funcionalidades import menu, menu_pedidos;
+from componentes import funcionalidades;
 
 def cuenta_cobro():
     while True:
@@ -24,7 +24,7 @@ def cuenta_cobro():
                 
                 #Ciclo para Mostrar las categorias del menú.
                 i = 0;
-                for categoria, items in menu.items():
+                for categoria, items in funcionalidades.menu.items():
                     i +=1;
                     print(f'👌 ===> {i}). Menú de {categoria}:\n');
                 
@@ -36,7 +36,7 @@ def cuenta_cobro():
 
                         #Mostrar la categoria del menú elegido.
                         j = 0;
-                        for categoria, items in menu.items():
+                        for categoria, items in funcionalidades.menu.items():
                             #Menú de jugos.
                             if(opcion == 1 and j == 0):
                                 print(f'\n****MENÚ DE {categoria.upper()}****\n')
@@ -59,7 +59,7 @@ def cuenta_cobro():
                         
                         opcion = str(input('\nDigite el nombre del producto a elegir: ')).title();
                     
-                        pedido_x_cliente = menu_pedidos(opcion);
+                        pedido_x_cliente = funcionalidades.menu_pedidos(opcion);
                         print(pedido_x_cliente)
 
 
@@ -74,4 +74,3 @@ def cuenta_cobro():
             print(f'\n{e}\nEl valor ingresado no es correcto.')
     return;
 
-cuenta_cobro();
