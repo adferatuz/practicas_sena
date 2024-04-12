@@ -5,72 +5,101 @@
 from componentes import funcionalidades;
 
 def cuenta_cobro():
+
+    #Declaracion de variables
+    lista_clientes = {};
+    pedido_x_cliente= [];
+    descuento = 0.20;
+    pago_x_cliente = 0;
+
     while True:
-        try:            
+        try: 
 
-            #Declaracion de variables
-            lista_clientes = {};
-            pedido_x_cliente= {};
-            descuento = 0.20;
-            pago_x_cliente = 0;
             cantidad_clientes = int(input('Cuantos clientes van a hacer pedido?: '));
-            contador = 1;
-
-            #Ciclo para hacer pedidos
-            while (contador <= cantidad_clientes):
-                print(f'\nCliente numero {contador}: \n')
-                print(f'\n***********MENÚ************\n\n',
-                      '********CATEGORIA********\n')
-                
-                #Ciclo para Mostrar las categorias del menú.
-                i = 0;
-                for categoria, items in funcionalidades.menu.items():
-                    i +=1;
-                    print(f'👌 ===> {i}). Menú de {categoria}:\n');
-                
-                #Manejo de errores para elegir la opcion del menú
-                while True:
-                    try:
-
-                        opcion = int(input('\nQue categoria del menú desea elegir; La opcion (1), (2) o (3): '))
-
-                        #Mostrar la categoria del menú elegido.
-                        j = 0;
-                        for categoria, items in funcionalidades.menu.items():
-                            #Menú de jugos.
-                            if(opcion == 1 and j == 0):
-                                print(f'\n****MENÚ DE {categoria.upper()}****\n')
-                                for item, precio in items.items():
-                                    print(f'  ===> {item}: {precio}')
-                                
-                            #Menú de Comidas rapidas.
-                            if(opcion == 2 and j == 1):
-                                print(f'\n****MENÚ DE {categoria.upper()}****\n')
-                                for item, precio in items.items():
-                                    print(f' - {item}: {precio}')
-
-                            #Menú de postres.
-                            if(opcion == 3 and j == 2):
-                                print(f'\n****MENÚ DE {categoria.upper()}****\n')
-                                for item, precio in items.items():
-                                    print(f' - {item}: {precio}')
-
-                            j+=1
-                        
-                        opcion = str(input('\nDigite el nombre del producto a elegir: ')).title();
-                    
-                        pedido_x_cliente = funcionalidades.menu_pedidos(opcion);
-                        print(pedido_x_cliente)
-
-
-                    except ValueError as error:
-                        print(f'\n{error}\nEl valor ingresado es incorrecto.')
-
-                contador +=1
             break;
-                
-
+        
         except ValueError as e:
             print(f'\n{e}\nEl valor ingresado no es correcto.')
+
+    #Ciclo para hacer pedidos
+    contador = 1;
+    while (contador <= cantidad_clientes):
+
+        print(f'\nCliente numero {contador}: \n');
+
+        #imprimimos las categorias del menú de pedidos
+        funcionalidades.categoria_menu();
+        
+        #Manejo de errores para elegir la opcion del menú
+        while True:
+            try:
+                #elecion de la categoria del menú
+                opcion_categoria = int(input('\nQue categoria del menú desea elegir; La opcion (1), (2) o (3): '))
+                break;
+            
+            except ValueError as error:
+                print(f'\n{error}\nEl valor ingresado es incorrecto.')
+
+        #Funcion que muestra las categorias del menú 
+        funcionalidades.items_categoria_menu(opcion_categoria);
+        
+        #opcion del producto a elegir
+        opcion_item_categoria = str(input('\nDigite el nombre del producto a elegir: ')).title();
+
+        #llamada a la funcion para elegir pedido
+        pedido_x_cliente.append(funcionalidades.menu_pedidos(opcion_item_categoria));
+        if(pedido_x_cliente == True):
+            print(pedido_x_cliente );
+
+        while True:
+            try:
+
+                #opcion para agregar mas consumo a la cuenta
+                agregar_pedido = input("si deseas agregar algo mas al pedido digita la tecla 's' de lo contrario digita la tecla 'n'; cual es tu elección?: ").upper();
+            
+                if(agregar_pedido == 'S' ):
+
+                    #imprimimos las categorias del menú de pedidos
+                    funcionalidades.categoria_menu();
+
+                    #Manejo de errores para elegir la opcion del menú
+                    while True:
+                        try:
+
+                            #elecion de la categoria del menú
+                            opcion_categoria = int(input('\nQue categoria del menú desea elegir; La opcion (1), (2) o (3): '))
+                            break;
+                        
+                        except ValueError as error:
+                            print(f'\n{error}\nEl valor ingresado es incorrecto.')
+                    
+                    #Funcion que muestra las categorias del menú 
+                    funcionalidades.items_categoria_menu(opcion_categoria);
+
+                    #opcion del producto a elegir
+                    opcion_item_categoria = str(input('\nDigite el nombre del producto a elegir: ')).title();
+
+                    #llamada a la funcion para elegir pedido
+                    pedido_x_cliente.append(funcionalidades.menu_pedidos(opcion_item_categoria));
+                    print(pedido_x_cliente);
+
+                elif(agregar_pedido == 'N'):
+                    cliente = f'Cliente # {str(contador)}';
+
+                    #Agregar pedido total al cliente
+                    lista_clientes[cliente] = pedido_x_cliente;
+                    print(f'\nRegistro del consumo de clientes =   {lista_clientes}\n');
+                    pedido_x_cliente = [];
+                    break;
+                
+                else:
+                    print('el caracter digitado es incorrecto; por favor escriba nuevamente que opción desea realizar.')
+
+
+            except ValueError as e:
+                print(f'{e}\n El valor ingresado es incorrecto.')
+            
+        contador +=1
+              
     return;
 
