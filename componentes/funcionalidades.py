@@ -25,7 +25,7 @@ menu = {
                 'Maracuya' : 7000,
                 'Lulo' : 4000, 
                 'Guayaba' : 4000, 
-                'Limonada' : 4000
+                'Limonada' : 5000
             },
     'comidas rapidas' : {'Perro Caliente' : 10000, 
                             'Hamburguesa' : 10000, 
@@ -33,7 +33,11 @@ menu = {
                             },
     'postres':{'Tiramisu' : 7000, 
                 'Tres Leches' : 6000, 
-                'Arroz Con Leche' : 4000 }  
+                'Arroz Con Leche' : 4000 },
+
+    'especiales':{'Churrasco' : 32000,
+                  'Mojarra Frita' : 32000,
+                  'Arroz Con Pollo' : 32000}  
 };
 
 #Lista de opciones de  menú de algoritmos
@@ -98,9 +102,15 @@ def items_categoria_menu(opcion):
             print(f'\n****MENÚ DE {categoria.upper()}****\n')
             for item, precio in items.items():
                 print(f' - {item}: {precio}')
+
+        #Menú de especiales.
+        elif(opcion == 4 and j == 3):
+            print(f'\n****MENÚ DE {categoria.upper()}****\n')
+            for item, precio in items.items():
+                print(f' - {item}: {precio}')
             
             
-        elif(opcion > 3):
+        elif(opcion > 4):
             print('La opcion digitada no esta en la lista de la categoria; por favor digita nuevamente la opcion a elegir. ');
                         
         j+=1

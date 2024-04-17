@@ -9,8 +9,6 @@ def cuenta_cobro():
     #Declaracion de variables
     lista_clientes = {};
     pedido_x_cliente= [];
-    descuento = 0.20;
-    pago_x_cliente = 0;
 
     while True:
         try: 
@@ -34,7 +32,7 @@ def cuenta_cobro():
         while True:
             try:
                 #elecion de la categoria del menú
-                opcion_categoria = int(input('\nQue categoria del menú desea elegir; La opcion (1), (2) o (3): '))
+                opcion_categoria = int(input('\nQue categoria del menú desea elegir; La opcion (1), (2), (3) o (4): '))
                 break;
             
             except ValueError as error:
@@ -48,8 +46,7 @@ def cuenta_cobro():
 
         #llamada a la funcion para elegir pedido
         pedido_x_cliente.append(funcionalidades.menu_pedidos(opcion_item_categoria));
-        if(pedido_x_cliente == True):
-            print(pedido_x_cliente );
+        print(pedido_x_cliente);
 
         while True:
             try:
@@ -85,11 +82,18 @@ def cuenta_cobro():
 
                 elif(agregar_pedido == 'N'):
                     cliente = f'Cliente # {str(contador)}';
+                    facturaccion = [];
 
+                    #filtracion de la lista del pedido por cilente para eliminar None
+                    for i in range(len(pedido_x_cliente)):
+                        if(pedido_x_cliente[i] != None):
+                            facturaccion.append(pedido_x_cliente[i]);                    
+                    
                     #Agregar pedido total al cliente
-                    lista_clientes[cliente] = pedido_x_cliente;
+                    lista_clientes[cliente] = facturaccion;
                     print(f'\nRegistro del consumo de clientes =   {lista_clientes}\n');
                     pedido_x_cliente = [];
+                    facturaccion = [];
                     break;
                 
                 else:
@@ -100,6 +104,30 @@ def cuenta_cobro():
                 print(f'{e}\n El valor ingresado es incorrecto.')
             
         contador +=1
-              
+
+    lista_valor_total_x_cliente =[];
+    valor_total = 0;
+    for cliente, consumos in lista_clientes.items():
+        valor_x_cliente = 0;
+        suma_x_cliente = 0;        
+
+        for consumo in consumos:
+            for valor in consumo.values():
+                suma_x_cliente += valor;
+    
+        if(suma_x_cliente >= 50000):
+            descuento = (suma_x_cliente * 0.20);
+            valor_x_cliente = (suma_x_cliente - descuento);
+            print(f'\nEl {cliente} tiene un descuento del 20% por consumo mayor a $50000 pesos: el valor total a pagar es de ${valor_x_cliente} pesos\n');
+            lista_valor_total_x_cliente.append(valor_x_cliente);
+        else:
+            print(f'\nEl {cliente} no supero el consumo mayor a $50000 pesos, y su consumo es de: ${suma_x_cliente} pesos\n');  
+            lista_valor_total_x_cliente.append(suma_x_cliente); 
+
+    for i in range(len(lista_valor_total_x_cliente)):
+        valor_total += lista_valor_total_x_cliente[i];
+    
+    print(f'\nEl valor total a pagar es de: ${valor_total} pesos');
+
     return;
 
